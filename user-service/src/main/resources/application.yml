@@ -1,11 +1,17 @@
-server:
-  port: 8081
+app:
+    name: user
+    hostname: localhost
+    ereka:
+        hostname: localhost
+        port: 8761
+    server:
+      port: 8081
 
 spring:
   application:
-    name: user-service
+    name: ${app.name}-service
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://${app.ereka.hostname}:${app.ereka.port}/eureka/

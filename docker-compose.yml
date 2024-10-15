@@ -11,7 +11,9 @@ services:
       - KC_DB_URL=jdbc:postgresql://keycloak-db:5432/keycloak
       - KC_DB_USERNAME=keycloak
       - KC_DB_PASSWORD=password
-    command: start-dev
+    command: [ "start-dev", "--import-realm" ]
+    volumes:
+      - ecommercemicro_keycloak_realm:/opt/keycloak/data/import/
     ports:
       - "8082:8080"  # Expose Keycloak on port 8082
     depends_on:
@@ -29,41 +31,62 @@ services:
       - "5433:5432"  # Expose PostgreSQL for Keycloak on port 5433
     networks:
       - ecommerce-network  # Connect to the network
+    volumes:
+      - keycloak-db-data:/var/lib/postgresql/data  # Persist data
 
-  eureka-server:
-    build:
-      context: ./eureka-server  # Path to the Dockerfile
-    ports:
-      - "8761:8761"  # Expose Eureka on port 8761
-    networks:
-      - ecommerce-network  # Connect to the network
-
-  gateway-service:
-    build:
-      context: ./gateway-service  # Path to the Dockerfile
-    ports:
-      - "8080:8080"  # Expose Gateway on port 8080
-    depends_on:
-      - eureka-server
-      - keycloak  # Dependency on Keycloak
-    networks:
-      - ecommerce-network  # Connect to the network
-
-  user-service:
-    build:
-      context: ./user-service  # Path to the Dockerfile
-    ports:
-      - "8081:8081"  # Expose User Service on port 8081
-    depends_on:
-      - eureka-server
-      - keycloak  # Dependency on Keycloak
+  user-db:
+    image: postgres:14
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://keycloak-db:5432/userdb  # Path to the database
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=password
+      - POSTGRES_DB=userdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5434:5432"  # Expose PostgreSQL for User Service on port 5434
     networks:
       - ecommerce-network  # Connect to the network
+    volumes:
+      - user-db-data:/var/lib/postgresql/data  # Persist data
+
+#  eureka-server:
+#    build:
+#      context: ./eureka-server  # Path to the Dockerfile
+#    ports:
+#      - "8761:8761"  # Expose Eureka on port 8761
+#    networks:
+#      - ecommerce-network  # Connect to the network
+#
+#  gateway-service:
+#    build:
+#      context: ./gateway-service  # Path to the Dockerfile
+#    ports:
+#      - "8080:8080"  # Expose Gateway on port 8080
+#    depends_on:
+#      - eureka-server
+#      - keycloak  # Dependency on Keycloak
+#    networks:
+#      - ecommerce-network  # Connect to the network
+#
+#  user-service:
+#    build:
+#      context: ./user-service  # Path to the Dockerfile
+#    ports:
+#      - "8081:8081"  # Expose User Service on port 8081
+#    depends_on:
+#      - eureka-server
+#      - keycloak  # Dependency on Keycloak
+#      - user-db  # Dependency on User DB
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-db:5432/userdb  # Path to the database
+#      - SPRING_DATASOURCE_USERNAME=postgres
+#      - SPRING_DATASOURCE_PASSWORD=password
+#    networks:
+#      - ecommerce-network  # Connect to the network
 
 networks:
   ecommerce-network:
     driver: bridge  # Use bridge network
+
+volumes:
+  keycloak-db-data:
+  user-db-data:
+  ecommercemicro_keycloak_realm:

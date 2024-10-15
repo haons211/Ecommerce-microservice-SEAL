@@ -1,25 +1,55 @@
-server:
-  port: 8080
+app:
+  name: gateway # change
+  hostname: localhost # change
+  server-port: 8181
+  eureka:
+    hostname: localhost # change
+    port: 8761
+  version: v1
+  user-service:
+    name: user
+    context-path: api/${app.user-service.name}/${app.version}
+  keycloak:
+    hostname: localhost # change
+    port: 8082
 
+security:
+  enabled: true
+  skip-urls:
+    - /eureka/**
+    - /actuator/**
+    - /${app.user-service.context-path}/**
 spring:
-  application:
-    name: gateway-service
-
-  cloud:
-    gateway:
-      routes:
-        - id: user-service
-          uri: lb://USER-SERVICE
-          predicates:
-            - Path=/users/**
-
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/realms/ecommerce
+          issuer-uri: http://${app.keycloak.hostname}:${app.keycloak.port}/realms/EcommerceSEAL
+          jwk-set-uri: http://${app.keycloak.hostname}:${app.keycloak.port}/realms/EcommerceSEAL/protocol/openid-connect/certs
+cloud:
+  gateway:
+    globalcors:
+      '[/**]':
+        allowedOrigins: "*"
+        allowedMethods: "*"
+    discovery:
+      locator:
+        enabled: true
+    default-filters:
+      - TokenRelay
+    routes:
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+          - Path=/api/user/**
+
+server:
+  port: ${app.server-port}
 
 eureka:
   client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+    serviceUrl:
+      defaultZone: http://${app.eureka.hostname}:${app.eureka.port}/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    lease-renewal-interval-in-seconds: 5

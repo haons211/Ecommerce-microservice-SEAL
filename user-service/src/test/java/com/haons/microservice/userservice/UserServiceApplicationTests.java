@@ -12,3 +12,10 @@ class UserServiceApplicationTests {
     }
 
 }
+/*
+- chia theo feature
+- chia theo use case
+- Khi xong use case, document lai : issue, solutions, options, tai sao lai chon.
+- Chia theo milestone : deploy local, aws, gcp, azure, ...
+
+ */
