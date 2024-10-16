@@ -1,10 +1,10 @@
-package com.haons.microservice.eurekaserver;
+package com.haons.microservice.discoveryservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EurekaServerApplicationTests {
+class DiscoveryServiceApplicationTests {
 
     @Test
     void contextLoads() {

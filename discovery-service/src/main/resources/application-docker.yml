@@ -1,0 +1,8 @@
+app:
+  hostname: discovery-service
+  zipkin:
+    hostname: zipkin
+
+#spring:
+#  profiles:
+#    active: docker

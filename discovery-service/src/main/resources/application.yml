@@ -1,0 +1,58 @@
+app:
+  application-name: discovery
+  hostname: localhost
+  server-port: 8761
+  zipkin:
+    hostname: localhost
+    server-port: 9411
+    context-path: api/v2/spans
+    endpoint: http://${app.zipkin.hostname}:${app.zipkin.server-port}/${app.zipkin.context-path}
+
+spring:
+  application:
+    name: ${app.application-name}-service
+  profiles:
+    active: local
+
+server:
+  port: ${app.server-port}
+
+eureka:
+  client:
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://${app.hostname}:${app.server-port}/eureka
+  instance:
+    hostname: ${app.hostname}
+  server:
+    expected-client-renewal-interval-seconds: 5
+    use-read-only-response-cache: false
+
+logging:
+  level:
+    root: INFO
+  pattern:
+    level: "%5p[${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
+management:
+  tracing:
+    enabled: true
+    propagation:
+      type: b3
+    sampling:
+      probability: 1.0
+  endpoint:
+    health:
+      show-details: always
+  health:
+    diskspace:
+      enabled: true
+    db:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  zipkin:
+    tracing:
+      endpoint: ${app.zipkin.endpoint}
