@@ -136,7 +136,7 @@ sequenceDiagram
         - This microservice handles user-related functionality, such as creating, reading, and updating user data.
     - order-service: Updating
         - This microservice handles order-related functionality, such as creating, reading, and updating order data.
-    - inventory-service: https://github.com/ericdaniel6166/inventory-service-eric6166
+    - inventory-service: Updating
         - This microservice handles inventory-related functionality, such as managing product stock levels.
     - payment-service: Updating
         - This microservice handles payment-related functionality, such as processing payments.
