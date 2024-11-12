@@ -229,8 +229,7 @@ guest/P@ssw0rd
 http://localhost:8181/swagger-ui.html
 ```
 
-![img.png](img.png)
-![img_1.png](img_1.png)
+
 
 ##### Zipkin
 
@@ -238,7 +237,6 @@ http://localhost:8181/swagger-ui.html
 http://localhost:9411/
 ```
 
-![img_3.png](img_3.png)
 
 ##### ActiveMQ
 
@@ -250,7 +248,7 @@ username/password
 admin/admin
 ```
 
-![img_4.png](img_4.png)
+
 
 ##### Apache Kafka
 
@@ -264,4 +262,3 @@ Zookeeper Port: 2181
 Bootstrap servers: localhost:9092
 ```
 
-![img_2.png](img_2.png)
