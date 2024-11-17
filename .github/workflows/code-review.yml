@@ -37,5 +37,5 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: gemini-1.5-pro-002 # Optional, default is `gemini-1.5-flash-002`
+          GEMINI_MODEL: gemini-1.5-flash-002# Optional, default is `gemini-1.5-flash-002`
           INPUT_EXCLUDE: "*.md,*.txt,package-lock.json,*.yml,*.yaml"
