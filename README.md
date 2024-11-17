@@ -1,5 +1,23 @@
 # Ecommerce-microservice-SEAL
 
+## Table of Contents
+1. [Sequence Diagram](#sequence-diagram)
+    - [Choreography-based Saga](#choreography-based-saga)
+    - [Orchestration-based Saga](#orchestration-based-saga)
+2. [List of Technologies Used](#list-of-technologies-used)
+3. [Prerequisite](#prerequisite)
+4. [Setup](#setup)
+5. [Running the App](#running-the-app)
+    - [Adding to Host File](#adding-to-host-file)
+    - [Run Command in Spring-Boot-Microservices Directory](#run-command-in-spring-boot-microservices-directory)
+6. [Keycloak](#keycloak)
+    - [Admin Console](#admin-console)
+    - [Get Access Token](#get-access-token)
+    - [Account](#account)
+7. [Swagger](#swagger)
+8. [Zipkin](#zipkin)
+9. [ActiveMQ](#activemq)
+10. [Apache Kafka](#apache-kafka)
 ## Sequence Diagram
 
 #### Choreography-based Saga
@@ -261,4 +279,95 @@ Zookeeper Port: 2181
 
 Bootstrap servers: localhost:9092
 ```
+
+## How to Contribute
+
+### Commit Message Conventions
+
+To maintain a clear and consistent commit history, please follow the following commit message conventions:
+
+**Type:**
+
+  * **feat:** A new feature
+  * **fix:** A bug fix
+  * **docs:** Documentation only changes
+  * **style:** Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc.)
+  * **refactor:** A code change that neither fixes a bug nor adds a feature
+  * **perf:** A code change that improves performance
+  * **test:** Adding missing tests or correcting existing tests
+  * **chore:** Changes to the build process or auxiliary tools and libraries   
+
+
+**Scope:**
+
+  * **component:** The specific component affected by the change
+  * **feature:** The specific feature affected by the change
+
+**Subject:**
+
+  * A concise description of the change, in imperative mood.
+
+**Body:**
+
+  * A more detailed description of the change, if necessary.
+
+**Footer:**
+
+  * References to issues, pull requests, or other relevant information.
+
+**Example:**
+
+```bash
+feat(api): Add endpoint for retrieving user data
+```
+### Contributing Workflow
+
+### Contributing Workflow
+
+1. **Fork the Repository:**
+   - Fork the main repository to your personal GitHub account.
+
+2. **Clone Your Fork:**
+   - Clone your forked repository to your local machine:
+     ```bash
+     git clone 
+     ```
+
+3. **Create a New Branch:**
+   - Create a new branch for your feature or bug fix:
+     ```bash
+     git checkout -b feature-name
+     ```
+
+4. **Make Your Changes:**
+   - Make the necessary changes   
+ to the code.
+
+5. **Commit Your Changes:**
+   - Stage your changes:
+     ```bash
+     git add .
+     ```
+   - Commit your changes with a clear and concise message following the specified conventions:
+     ```bash
+     git commit -m "feat(api): Add endpoint for retrieving user data"
+     ```
+
+6. **Push Your Changes to Your Fork:**
+   - Push your branch to your remote repository:
+     ```bash
+     git push origin feature-name
+     ```
+
+7. **Create a Pull Request:**
+   - Go to your forked repository on GitHub.
+   - Click the "New pull request" button.
+   - Select your feature branch as the source branch and the main branch as the target branch.
+   - Provide a clear and concise description of your changes.
+   - Provide a comment :```/gemini-review ``` . For reviewing new pull request.
+   - Submit your pull request.
+
+8. **Review and Merge:**
+   - Your pull request will be reviewed by the project maintainers.
+   - If approved, your changes will be merged into the main branch. 
 
